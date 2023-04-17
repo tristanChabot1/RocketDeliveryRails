@@ -1,0 +1,21 @@
+<%= form_with(model: employee) do |form| %>
+
+  <div class="address">
+    <%= form.label :address_id, style: "display: block" %>
+    <%= form.collection_select(:address_id, Address.all, :id, :street_address) %>
+  </div>
+
+  <div class="phone">
+    <%= form.label :phone, style: "display: block" %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="email">
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="submit">
+    <%= form.submit %>
+  </div>
+<% end %>

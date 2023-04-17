@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RocketDeliveryBackend</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'custom' %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav id="navbar" class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div>
+            <%= image_tag('rocket_food_delivery.png', class: 'navbar-brand', alt: 'Logo') %>
+          </div>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navlinks">
+          <ul class="nav navbar-nav">
+            <li><a href="/">RFD Admin</a></li>
+            <% if user_signed_in? %>
+              <% if Employee.find_by(user_id: current_user.id).present? %>
+                <li><a href="/employees">Employees</a></li>
+                <li><a href="/restaurants">Restaurants</a></li>
+              <% end %>
+            <% else %>
+              <li id="sign-in">
+              <%= link_to "Sign In", new_user_session_path %>
+              </li>
+            <% end %>
+            <% if user_signed_in? %>
+              <li id="sign-out">
+              <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<div id="show-restaurant">
+  <h1>Restaurant's Info</h1>
+  <p style="color: green"><%= notice %></p>
+
+  <div id="restaurant-info">
+    <ul>
+      <li><p>User Id: <strong><%= @restaurant.user_id %></strong></p></li>
+      <li><p>Address Id: <strong><%= @restaurant.address_id %></strong></p></li>
+      <li><p>Phone Number: <strong><%= @restaurant.phone %></strong></p></li>
+      <li><p>Email: <strong><%= @restaurant.email %></strong></p></li>
+      <li><p>Name: <strong><%= @restaurant.name %></strong></p></li>
+      <li><p>Price range: <strong><%= @restaurant.price_range %></strong></p></li>
+      <li><p>Active: <strong><%= @restaurant.active %></strong></p></li>    
+    </ul>    
+  </div>
+
+  <div class="back-button">
+    <%= link_to "Edit", edit_restaurant_path(@restaurant) %> |
+    <%= link_to "Back", restaurants_path %>
+  </div>
+</div>

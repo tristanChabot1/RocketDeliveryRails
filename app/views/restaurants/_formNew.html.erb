@@ -1,0 +1,51 @@
+<%= form_with model: @restaurant do |f| %>
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.collection_select(:user_id, User.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :available_address_id %>
+    <%= f.collection_select(:address_id, Address.where.not(id: Restaurant.pluck(:address_id)), :id, :street_address) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.telephone_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price_range %>
+    <%= f.number_field :price_range %>
+  </div>
+
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

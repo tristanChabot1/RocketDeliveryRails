@@ -1,0 +1,10 @@
+<div id="edit-restaurant">
+  <h1>Edit restaurant</h1>
+
+  <%= render "form", restaurant: @restaurant %>
+
+  <div class="back-button" style="margin-bottom: 2rem">
+    <%= link_to "Show", @restaurant %> |
+    <%= link_to "Back", restaurants_path %>
+  </div>
+</div>

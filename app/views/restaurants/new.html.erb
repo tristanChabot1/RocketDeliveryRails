@@ -1,0 +1,9 @@
+<div id="new-restaurant-page">
+  <h1>New Restaurant</h1>
+
+  <%= render "formNew", restaurant: @restaurant %>
+
+  <div class="back-button" style="margin-bottom: 2rem">
+    <%= link_to "Back", restaurants_path %>
+  </div>
+</div>

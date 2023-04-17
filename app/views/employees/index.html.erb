@@ -1,0 +1,82 @@
+<div id="employee-page">
+  <h1>Employees</h1>
+  <div id="new-employee">
+    <%= link_to "New Employee", new_employee_path %>
+  </div>
+  <p style="color: greenyellow"><%= notice %></p>
+  <table class="table">
+    <tr> 
+      <th>
+        User ID
+      </th>
+      <th>
+        User's Name
+      </th>
+      <th>
+        Address ID
+      </th>
+      <th>
+        Address
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Email
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </<tr>
+    <% @employees.each do |employee| %>
+      <tr> 
+        <td>
+          <%= employee.user_id %>
+        </td>
+        <td>
+          <%= employee.user.name %>
+        </td>
+        <td>
+          <%= employee.address_id %>
+        </td>
+        <td>
+          <%= "#{employee.address.street_address}, #{employee.address.city}" %>
+        </td>
+        <td>
+          <%= employee.phone %>
+        </td>
+        <td>
+          <%= employee.email %>
+        </td>
+        <td class="dark-green">
+          <%= link_to "Show", employee %>
+        </td>
+        <td class="dark-green">
+          <%= link_to "Edit", edit_employee_path(employee) %>
+        </td>
+        <td class="red">
+          <%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </<tr>
+    <% end %>
+  </table>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p style="color: white">coucou</p>
+</div>

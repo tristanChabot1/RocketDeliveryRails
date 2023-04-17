@@ -1,0 +1,18 @@
+<div id="show-employee">
+  <h1>Employee's Info</h1>
+  <p style="color: green"><%= notice %></p>
+
+  <div id="employee-info">
+    <ul>
+      <li><p>User Id: <strong><%= @employee.user_id %></strong></p></li>
+      <li><p>Address Id: <strong><%= @employee.address_id %></strong></p></li>
+      <li><p>Phone Number: <strong><%= @employee.phone %></strong></p></li>
+      <li><p>Email: <strong><%= @employee.email %></strong></p></li>
+    </ul>
+  </div>
+
+  <div class="back-button">
+    <%= link_to "Edit", edit_employee_path(@employee) %> |
+    <%= link_to "Back", employees_path %>
+  </div>
+</div>

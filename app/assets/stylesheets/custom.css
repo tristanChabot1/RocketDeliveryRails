@@ -1,0 +1,340 @@
+/* BODY */
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+body h1 {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: serif;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.537);
+    box-shadow: 0 0 30px rgb(0, 0, 0);
+}
+
+body {
+    font-family: sans-serif;
+}
+
+
+/* NAVBAR */
+
+#navbar {
+    border-radius: 0px;
+    margin-bottom: 0% !important;
+    min-height: fit-content;
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
+    background-color: #1a1a1a;
+}
+
+#navbar .container-fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#navbar img {
+    width: 66vh;
+    height: 20vh;
+    padding: 0%;
+}
+
+#navbar #navlinks {
+    flex: 1;
+}
+
+#navbar ul.nav.navbar-nav li a:hover {
+    transition: 0.5s;
+    background-color: #fe0201;
+    color: white !important;
+}
+
+#navbar ul.nav.navbar-nav li a {
+    color: rgb(255, 249, 249);
+    border-radius: 5px;
+}
+
+#navbar ul.nav.navbar-nav li#sign-out a  {
+    color: #fe0201;
+}
+
+#navbar ul.nav.navbar-nav li#sign-in a  {
+    color: rgb(10, 184, 10);
+}
+
+/* --------------------------------------- */
+
+/* ALL PAGES DEFFAULT */
+
+#home-page,
+#employee-page,
+#show-employee,
+#show-restaurant,
+#edit-employee,
+#edit-restaurant,
+#new-employee-page,
+#new-restaurant-page,
+#restaurant-page,
+#login-page {
+    background-image: url(../assets/teaspoons-full-of-spices.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: auto;
+    overflow: auto;
+    text-align: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.back-button a {
+    color: rgb(191, 208, 252);
+}
+
+/* --------------------------------------- */
+
+/* HOME PAGE */
+
+#home-page .top {
+    display: flex;
+    margin-top: 20px;
+}
+
+#home-page #welcome-message,
+#employee-page #new-employee,
+#restaurant-page #new-restaurant {
+    margin-right: auto;
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+#home-page #welcome-message p {
+    margin: 0%;
+}
+
+#home-page h1 {
+    margin: 0%;
+    margin-right: calc(50% - 175px / 2)
+}
+
+/* --------------------------------------- */
+
+/* EMPLOYEE PAGE */
+
+#employee-page #new-employee a,
+#restaurant-page #new-restaurant a {
+    color: #007d0f;
+}
+
+#employee-page #new-employee:hover {
+    transition: 1s;
+    background-color: #fe0201;
+}
+
+#employee-page #new-employee:hover a {
+    transition: 0.7s;
+    color: white;
+}
+
+/* --------------------------------------- */
+
+/* TABLES */
+
+#employee-page table,
+#restaurant-page table  {
+    border: 2px solid #4D4D4D;
+    background-color: rgb(143, 103, 103);
+}
+
+#employee-page table tr:first-child,
+#restaurant-page table tr:first-child {
+    background-color: #2d2d2d !important;
+}
+
+#employee-page table tr:first-child th,
+#restaurant-page table tr:first-child th {
+    color: white;
+}
+
+#employee-page table tr:nth-of-type(odd),
+#restaurant-page table tr:nth-of-type(odd) {
+    background-color: #8b7e7e;
+}
+
+#employee-page table th,
+#restaurant-page table th {
+    text-align: center;
+}
+
+#employee-page table td.red a,
+#restaurant-page table td.red a {
+    color: #fe0201;
+}
+
+.dark-green a {
+    color: #005f0b;
+}
+
+/* --------------------------------------- */
+
+/* SHOW EMPLOYEE PAGE */
+
+#show-employee #employee-info,
+#show-restaurant #restaurant-info {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 15px;
+    width: fit-content;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+#show-employee #employee-info ul,
+#show-restaurant #restaurant-info ul {
+    padding: 10px;
+    margin: 0%;
+}
+
+/* --------------------------------------- */
+
+/* EDIT EMPLOYEE PAGE */
+
+#edit-employee form {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 15px;
+    width: 25%;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+#edit-employee form div,
+#edit-restaurant form div {
+    margin-bottom: 10px;
+}
+
+#edit-employee form div #employee_phone {
+    width: 60%;
+}
+
+#edit-employee form div #employee_email{
+    width: 80%;
+}
+
+#edit-employee form div.submit input:hover,
+#edit-restaurant form div.submit input:hover {
+    transition: 1s;
+    background-color: #fe0201;
+    color: white;
+}
+
+/* --------------------------------------- */
+
+/* NEW EMPLOYEE PAGE */
+
+#new-employee-page form,
+#new-restaurant-page form {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 15px;
+    width: 25%;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+#new-employee-page form div.field,
+#new-restaurant-page form div.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#new-employee-page form div.actions input:hover,
+#new-restaurant-page form div.actions input:hover,
+#login-page form div.actions input:hover {
+    transition: 1s;
+    background-color: #fe0201;
+    color: white;
+}
+
+/* --------------------------------------- */
+
+/* RESTAURANT PAGE */
+
+#restaurant-page #new-restaurant:hover {
+    transition: 1s;
+    background-color: #fe0201;
+}
+
+#restaurant-page #new-restaurant:hover a {
+    transition: 0.7s;
+    color: white;
+}
+
+/* --------------------------------------- */
+
+/* EDIT RESTAURANT PAGE */
+
+#edit-restaurant form {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 15px;
+    width: 20%;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+/* --------------------------------------- */
+
+/* NEW RESTAURANT PAGE */
+
+#new-restaurant-page form div.field #restaurant_active {
+    align-self: start;
+}
+
+/* --------------------------------------- */
+
+/* LOG IN PAGE */
+
+#login-page form {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 15px;
+    width: 18%;
+    background-color: #cdcdcd;
+    border: 1px solid #4D4D4D;
+    border-radius: 5px;
+}
+
+#login-page form div #user_email,
+#login-page form div #user_password {
+    width: 100%;
+}
