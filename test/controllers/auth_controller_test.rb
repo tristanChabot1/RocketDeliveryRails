@@ -6,6 +6,8 @@ class ApiControllerTest < ActionDispatch::IntegrationTest
 
   test "post auth with valid credentials" do
     user = User.create(email: 'test@test.com', password: 'good_password', name: "user 1")
+    address = Address.create!(street_address: "Street 1", city: "City 1", postal_code: "11111")
+    customer = Customer.create!(user: user, address: address, phone: "123456")
     post "/api/login", headers: { "Content-Type": "application/json" }, params: { email: 'test@test.com', password: 'good_password' }.to_json
     assert_response :success
     assert_equal({ success: true }.to_json, response.body)

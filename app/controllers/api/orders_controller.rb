@@ -1,4 +1,5 @@
 class Api::OrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action except: [:update_status]
 
   def update_status

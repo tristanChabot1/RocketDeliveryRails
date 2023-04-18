@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "employees" => "employees#index"
 
   devise_for :users, path: 'api',
-  # path_names: { sign_in: 'login' },
+  path_names: { sign_in: 'login' },
   controllers: { sessions: 'api/auth' }
 
   devise_scope :user do
