@@ -18,6 +18,8 @@ module RocketDeliveryBackend
       end
     end
 
+    config.hosts << "https://1fdb-142-182-79-148.ngrok-free.app"
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
