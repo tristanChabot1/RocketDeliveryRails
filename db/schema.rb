@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_191316) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_19_213803) do
   create_table "addresses", force: :cascade do |t|
     t.string "street_address", null: false
     t.string "city", null: false
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_191316) do
     t.integer "restaurant_id", null: false
     t.string "name", null: false
     t.string "description"
-    t.integer "cost"
+    t.decimal "cost", precision: 8, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_products_on_restaurant_id"
