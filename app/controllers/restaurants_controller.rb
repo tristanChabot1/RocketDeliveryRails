@@ -4,14 +4,10 @@ class RestaurantsController < ApplicationController
 
   def index
     authenticate_user!
-  
     if Employee.find_by(user_id: current_user.id).present?
       @restaurants = Restaurant.all.map do |restaurant|
         rating_average = Order.where(restaurant_id: restaurant.id).average(:restaurant_rating).round(0)
-        products = restaurant.products # Get the associated products for the restaurant
-  
-        # Merge the restaurant attributes, rating average and products into a single hash
-        restaurant.attributes.merge(rating_average: rating_average, products: products)
+        restaurant.attributes.merge(rating_average: rating_average)
       end
       render json: @restaurants
     else
