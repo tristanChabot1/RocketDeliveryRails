@@ -19,7 +19,7 @@ class Api::OrdersController < ApplicationController
   end
 
   def index
-    orders = Order.includes(:customer, :restaurant, :order_status).all
+    orders = Order.includes(:customer, :restaurant, :order_status).where(customer_id: params[:id])
 
     if !params[:type].in?(["customer", "courier", "restaurant"]) && [Customer, Restaurant, Courier].none? { |model| model.exists?(user_id: params[:id]) }
       render json: { error: "Both 'user type' and 'id' parameters are required" }, status: :bad_request
@@ -40,17 +40,20 @@ class Api::OrdersController < ApplicationController
           restaurant_id: order.restaurant.id,
           restaurant_name: order.restaurant.name,
           restaurant_address: "#{order.customer.address.street_address}, #{order.customer.address.city}, #{order.customer.address.postal_code}",
+          courier_id: nil,
+          courier_name: nil,
           status: order.order_status.name,
           products: order.product_orders.map do |product_order|
             {
               product_id: product_order.id,
-              product_name: product_order.name,
-              quantity: product_order.quantity,
-              unit_cost: product_order.unit_cost,
-              total_cost: product_order.unit_cost * product_order.quantity
+              product_name: product_order.product.name,
+              quantity: product_order.product_quantity,
+              unit_cost: product_order.product_unit_cost,
+              total_cost: product_order.product_unit_cost * product_order.product_quantity
             }
           end,
-          total_cost: order.product_orders.sum { |product_order| product_order.unit_cost * product_order.quantity }
+          total_cost: order.product_orders.sum { |product_order| product_order.product_unit_cost * product_order.product_quantity },
+          date: order.created_at
         }
       end
       render json: orders_data
@@ -71,7 +74,7 @@ class Api::OrdersController < ApplicationController
       if restaurant.nil? || customer.nil?
         render json: { error: "Invalid restaurant or customer ID" }, status: :unprocessable_entity
       else
-        order_status = OrderStatus.create(name: "pending")
+        order_status = OrderStatus.find_by(name: "pending")
         order = Order.new(restaurant: restaurant, customer: customer, order_status: order_status)
   
         # Check for invalid product IDs before creating any product orders
