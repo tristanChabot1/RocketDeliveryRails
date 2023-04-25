@@ -25,11 +25,8 @@ Rails.application.routes.draw do
     get '/orders', to: 'orders#index'
     post '/orders', to: 'orders#create'
 
-    get '/customers', to: 'customers#index'
-    patch '/customers/:id', to: 'customers#update'
-
-    get '/couriers', to: 'couriers#index'
-    patch '/couriers/:id', to: 'couriers#update'
+    get '/account/:id', to: 'accounts#index'
+    post 'account/:id', to: 'accounts#update'
   end
 
 end
