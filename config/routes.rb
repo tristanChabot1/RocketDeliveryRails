@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
     get '/customers', to: 'customers#index'
     patch '/customers/:id', to: 'customers#update'
+
+    get '/couriers', to: 'couriers#index'
+    patch '/couriers/:id', to: 'couriers#update'
   end
 
 end
