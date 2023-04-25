@@ -9,7 +9,10 @@ class Api::RestaurantsController < ApplicationController
     elsif params[:price_range].present? && !params[:price_range].to_i.between?(1, 3)
       render json: { error: "Invalid rating or price range" }, status: :unprocessable_entity
     else
-      @restaurants = Restaurant.left_outer_joins(:orders).where("orders.restaurant_rating = ? OR orders.restaurant_rating IS NULL", params[:rating]).group(:id).select("restaurants.id, restaurants.name, restaurants.price_range, orders.restaurant_rating AS rating")
+      @restaurants = Restaurant.all.map do |restaurant|
+        rating_average = Order.where(restaurant_id: restaurant.id).average(:restaurant_rating).round(0)
+        restaurant.attributes.merge(rating_average: rating_average)
+      end
       render json: @restaurants
     end
   end

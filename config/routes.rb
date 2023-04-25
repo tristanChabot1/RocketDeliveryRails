@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :employees
-  resources :restaurants
-  get "restaurants" => "restaurants#index"
-  get "employees" => "employees#index"
+  # resources :employees
+  # resources :restaurants
+  # get "restaurants" => "restaurants#index"
+  # get "employees" => "employees#index"
 
   devise_for :users, path: 'api',
   path_names: { sign_in: 'login' },
@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     # Self written tests
     get '/orders', to: 'orders#index'
     post '/orders', to: 'orders#create'
+
+    get '/customers', to: 'customers#index'
+    patch '/customers/:id', to: 'customers#update'
   end
 
 end
