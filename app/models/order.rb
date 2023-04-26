@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   belongs_to :restaurant
   belongs_to :customer
   belongs_to :order_status
+  belongs_to :courier
+
 
   validates :customer, presence: { message: "can't be blank" }
   validates :restaurant, presence: { message: "can't be blank" }

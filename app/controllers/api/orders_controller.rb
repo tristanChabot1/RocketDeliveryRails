@@ -19,18 +19,22 @@ class Api::OrdersController < ApplicationController
   end
 
   def index
-    orders = Order.includes(:customer, :restaurant, :order_status).where(customer_id: params[:id])
-
-    if !params[:type].in?(["customer", "courier", "restaurant"]) && [Customer, Restaurant, Courier].none? { |model| model.exists?(user_id: params[:id]) }
+    orders = Order.includes(:customer, :restaurant, :order_status)
+    
+    if !params[:type].in?(["customer", "courier", "restaurant"]) || params[:id].blank?
       render json: { error: "Both 'user type' and 'id' parameters are required" }, status: :bad_request
-
     elsif !params[:type].in?(["customer", "courier", "restaurant"])
       render json: { error: "Invalid user type" }, status: :unprocessable_entity
-
-    elsif [Customer, Restaurant, Courier].none? { |model| model.exists?(user_id: params[:id]) }
-      render json: [], status: 200
-
     else
+      case params[:type]
+      when "customer"
+        orders = orders.where(customer_id: params[:id])
+      when "restaurant"
+        orders = orders.where(restaurant_id: params[:id])
+      when "courier"
+        orders = orders.where(courier_id: params[:id])
+      end
+  
       orders_data = orders.map do |order|
         {
           id: order.id,
@@ -39,9 +43,9 @@ class Api::OrdersController < ApplicationController
           customer_address: "#{order.customer.address.street_address}, #{order.customer.address.city}, #{order.customer.address.postal_code}",
           restaurant_id: order.restaurant.id,
           restaurant_name: order.restaurant.name,
-          restaurant_address: "#{order.customer.address.street_address}, #{order.customer.address.city}, #{order.customer.address.postal_code}",
-          courier_id: nil,
-          courier_name: nil,
+          restaurant_address: "#{order.restaurant.address.street_address}, #{order.restaurant.address.city}, #{order.restaurant.address.postal_code}",
+          courier_id: order.courier_id,
+          courier_name: order.courier&.user&.name,
           status: order.order_status.name,
           products: order.product_orders.map do |product_order|
             {
@@ -56,6 +60,7 @@ class Api::OrdersController < ApplicationController
           date: order.created_at
         }
       end
+  
       render json: orders_data
     end
   end
@@ -63,6 +68,7 @@ class Api::OrdersController < ApplicationController
   def create
     restaurant_id = params[:order][:restaurant_id]
     customer_id = params[:order][:customer_id]
+    courier_id = Courier.all.sample.id # get a random courier id
     product_orders = params[:order][:product_orders]
   
     if restaurant_id.blank? || customer_id.blank? || product_orders.blank?
@@ -75,7 +81,7 @@ class Api::OrdersController < ApplicationController
         render json: { error: "Invalid restaurant or customer ID" }, status: :unprocessable_entity
       else
         order_status = OrderStatus.find_by(name: "pending")
-        order = Order.new(restaurant: restaurant, customer: customer, order_status: order_status)
+        order = Order.new(restaurant: restaurant, customer: customer, courier_id: courier_id, order_status: order_status)
   
         # Check for invalid product IDs before creating any product orders
         invalid_product_ids = product_orders.select { |po| Product.find_by(id: po[:id]).nil? }.map { |po| po[:id] }
@@ -98,6 +104,9 @@ class Api::OrdersController < ApplicationController
             response_body = {
               restaurant_id: restaurant.id,
               customer_id: customer.id,
+              customer_name: customer.user.name,
+              order_id: order.id,
+              courier_id: courier_id,
               product_orders: order.product_orders.map { |po| { id: po.product_id, quantity: po.product_quantity } }
             }
             render json: response_body, status: :created
