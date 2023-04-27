@@ -103,6 +103,7 @@ class Api::OrdersController < ApplicationController
           if order.save
             response_body = {
               restaurant_id: restaurant.id,
+              restaurant_name: restaurant.name,
               customer_id: customer.id,
               customer_name: customer.user.name,
               order_id: order.id,
