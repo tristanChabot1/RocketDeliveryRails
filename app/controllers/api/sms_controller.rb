@@ -1,16 +1,6 @@
 class Api::SmsController < ApplicationController
     skip_before_action :verify_authenticity_token
   
-    def receive
-      message_body = params["Body"]
-      from_number = params["From"]
-  
-      # Handle incoming SMS message
-      # ...
-  
-      render plain: "Message received", status: :ok
-    end
-  
     def send_message
       to_number = params["to"]
       message_body = params["message"]

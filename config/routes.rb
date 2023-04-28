@@ -29,7 +29,6 @@ Rails.application.routes.draw do
     get '/account/:id', to: 'accounts#index'
     post 'account/:id', to: 'accounts#update'
 
-    post '/sms/receive' => 'sms#receive'
     post '/sms/send_message' => 'sms#send_message'
   end
 
